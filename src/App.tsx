@@ -179,7 +179,7 @@ function App() {
       window.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('keyup', handleKeyUp);
     };
-  }, []);
+  }, [playArcadeSound]);
 
   // Helper for click: briefly show pressed state
   const handleArcadeBtnClick = (i: number) => {

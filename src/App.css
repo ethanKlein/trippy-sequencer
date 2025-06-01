@@ -25,7 +25,7 @@ body::before {
   align-items: center;
   justify-content: flex-start;
   min-height: 100vh;
-  padding-top: 40px;
+  padding-top: 100px;
 }
 
 .sliders {
