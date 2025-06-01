@@ -290,3 +290,63 @@ input[type="range"]:focus {
   margin-bottom: 6px;
   display: block;
 }
+
+@media (max-width: 600px) {
+  .sequencer-app {
+    padding-top: 32px;
+  }
+  .sliders {
+    flex-direction: column;
+    gap: 24px;
+    margin-bottom: 24px;
+    margin-top: 16px;
+    width: 100%;
+    align-items: center;
+  }
+  .slider-group label {
+    font-size: 1rem;
+  }
+  .sequencer-grid {
+    padding: 10px 4px 8px 4px;
+    border-radius: 10px;
+    gap: 4px;
+    box-shadow: 0 0 0 1px #23242a, 0 1px 6px #000a, 0 0 0 1px #444 inset;
+  }
+  .sequencer-row {
+    gap: 4px;
+  }
+  .sequencer-node {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+  }
+  .arcade-buttons-row {
+    gap: 12px;
+    margin-bottom: 16px;
+    margin-top: 12px;
+  }
+  .arcade-btn {
+    width: 38px;
+    height: 38px;
+    font-size: 0.9rem;
+  }
+  .play-btn {
+    font-size: 1rem;
+    padding: 0.5em 1.2em;
+    border-radius: 20px;
+    margin-bottom: 16px;
+    margin-top: 4px;
+  }
+  /* MultiVisualizer portals */
+  .multi-visualizer-portals {
+    flex-direction: column !important;
+    gap: 12px !important;
+    margin: 0 0 12px 0 !important;
+    align-items: center !important;
+  }
+  .multi-visualizer-portals > div {
+    margin: 0 !important;
+    width: 80px !important;
+    height: 80px !important;
+  }
+}
