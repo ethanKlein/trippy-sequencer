@@ -1,38 +1,116 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+body, .sequencer-app {
+  background: #111;
   min-height: 100vh;
+  color: #fff;
+  font-family: 'Inter', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.sequencer-app {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  padding-top: 40px;
+}
+
+.sliders {
+  display: flex;
+  gap: 60px;
+  margin-bottom: 40px;
+  margin-top: 40px;
+}
+
+.slider-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #ccc;
+}
+
+.slider-group label {
+  margin-bottom: 8px;
+  font-size: 1.1rem;
+}
+
+input[type="range"] {
+  width: 180px;
+  accent-color: #aaa;
+}
+
+.sequencer-grid {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 8px;
+  background: #222;
+  padding: 32px 24px 24px 24px;
+  border-radius: 18px;
+  box-shadow: 0 4px 32px #000a;
+}
+
+.sequencer-row {
+  display: flex;
+  gap: 8px;
+}
+
+.sequencer-node {
+  width: 38px;
+  height: 38px;
+  background: #2c2c2c;
+  border-radius: 6px;
+  transition: background 0.15s;
+  cursor: pointer;
+  border: 2px solid #181818;
+  box-sizing: border-box;
+}
+
+.sequencer-node.active {
+  background: #39ff14;
+  box-shadow: 0 0 8px #39ff14cc;
+  border-color: #39ff14;
+}
+
+.sequencer-node.current {
+  background: #1e90ff;
+  box-shadow: 0 0 8px #1e90ffcc;
+  border-color: #1e90ff;
+}
+
+.sequencer-node.active.current {
+  background: #39ff14;
+  box-shadow: 0 0 16px #39ff14cc, 0 0 8px #1e90ff88;
+  border-color: #39ff14;
+}
+
+.arcade-buttons-row {
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: 32px;
+  margin-bottom: 32px;
+  margin-top: 24px;
 }
 
-.App-link {
-  color: #61dafb;
+.arcade-btn {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: none;
+  font-size: 2.5rem;
+  color: #fff;
+  background: #222;
+  box-shadow: 0 4px 24px #000a, 0 0 0 4px #444 inset;
+  cursor: pointer;
+  transition: background 0.15s, box-shadow 0.15s, transform 0.1s;
+  outline: none;
+  user-select: none;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.arcade-btn:active {
+  transform: scale(0.93);
+  box-shadow: 0 2px 8px #000a, 0 0 0 6px #fff3 inset;
+}
+.arcade-btn-blue {
+  background: #1e90ff;
+  color: #fff;
 }
