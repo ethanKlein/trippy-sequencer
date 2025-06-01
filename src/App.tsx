@@ -113,7 +113,7 @@ function App() {
     source.start();
   };
 
-  const playArcadeSound = (idx: number) => {
+  const playArcadeSound = React.useCallback((idx: number) => {
     const ctx = audioCtxRef.current;
     const buffer = arcadeBuffersRef.current[idx];
     if (!ctx || !buffer) return;
@@ -128,7 +128,7 @@ function App() {
     distortionNode.connect(analyserRef.current!);
     analyserRef.current!.connect(ctx.destination);
     source.start();
-  };
+  }, [pitch, distortion]);
 
   // Simple distortion curve
   function makeDistortionCurve(amount: number) {
