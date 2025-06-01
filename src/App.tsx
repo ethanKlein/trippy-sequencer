@@ -1,18 +1,9 @@
 import React, { useState, useRef } from 'react';
 import './App.css';
-import AudioVisualizer from './AudioVisualizer';
 import MultiVisualizer from './MultiVisualizer';
 
 const ROWS = 6;
 const COLS = 16;
-const ROW_LABELS = [
-  'Kick 1',
-  'Kick 2',
-  'Snare',
-  'Hi-Hat',
-  'Fart',
-  'Clap',
-];
 
 // Placeholder free sound sample URLs (replace with your own later)
 const SAMPLE_URLS = [
