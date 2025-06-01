@@ -1,10 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap');
+
 body, .sequencer-app {
-  background: #111;
+  background: linear-gradient(135deg, #23242a 0%, #181a22 100%);
   min-height: 100vh;
   color: #fff;
-  font-family: 'Inter', Arial, sans-serif;
+  font-family: 'Orbitron', Arial, sans-serif;
   margin: 0;
   padding: 0;
+  position: relative;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.18;
+  background: url('https://www.transparenttextures.com/patterns/diamond-upholstery.png'); /* subtle noise */
 }
 
 .sequencer-app {
@@ -33,21 +45,122 @@ body, .sequencer-app {
 .slider-group label {
   margin-bottom: 8px;
   font-size: 1.1rem;
+  font-family: 'Orbitron', Arial, sans-serif;
+  letter-spacing: 0.08em;
 }
 
 input[type="range"] {
   width: 180px;
-  accent-color: #aaa;
+  accent-color: #1e90ff;
+  background: transparent;
+  margin: 0.7em 0 1.2em 0;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 8px;
+  background: #23242a;
+  border-radius: 6px;
+  box-shadow: 0 0 0 2px #181a22, 0 0 12px #1e90ff44;
+}
+input[type="range"]:focus::-webkit-slider-runnable-track,
+input[type="range"]:hover::-webkit-slider-runnable-track {
+  background: #23242a;
+  box-shadow: 0 0 0 2px #39ff14, 0 0 16px #39ff1488;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #181a22;
+  border: 3px solid #1e90ff;
+  box-shadow: 0 0 0 2px #23242a, 0 0 12px #1e90ff88;
+  transition: border 0.18s, box-shadow 0.18s, background 0.18s;
+  cursor: pointer;
+  margin-top: -10px;
+}
+input[type="range"]:hover::-webkit-slider-thumb,
+input[type="range"]:focus::-webkit-slider-thumb {
+  border: 3px solid #39ff14;
+  box-shadow: 0 0 0 2px #39ff14, 0 0 16px #39ff1488;
+  background: #23242a;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #181a22;
+  border: 3px solid #1e90ff;
+  box-shadow: 0 0 0 2px #23242a, 0 0 12px #1e90ff88;
+  transition: border 0.18s, box-shadow 0.18s, background 0.18s;
+  cursor: pointer;
+}
+input[type="range"]:hover::-moz-range-thumb,
+input[type="range"]:focus::-moz-range-thumb {
+  border: 3px solid #39ff14;
+  box-shadow: 0 0 0 2px #39ff14, 0 0 16px #39ff1488;
+  background: #23242a;
+}
+input[type="range"]::-moz-range-track {
+  height: 8px;
+  background: #23242a;
+  border-radius: 6px;
+  box-shadow: 0 0 0 2px #181a22, 0 0 12px #1e90ff44;
+}
+input[type="range"]:focus::-moz-range-track,
+input[type="range"]:hover::-moz-range-track {
+  background: #23242a;
+  box-shadow: 0 0 0 2px #39ff14, 0 0 16px #39ff1488;
+}
+input[type="range"]::-moz-focus-outer {
+  border: 0;
+}
+input[type="range"]::-ms-fill-lower,
+input[type="range"]::-ms-fill-upper {
+  background: #23242a;
+  border-radius: 6px;
+  box-shadow: 0 0 0 2px #181a22, 0 0 12px #1e90ff44;
+}
+input[type="range"]:focus::-ms-fill-lower,
+input[type="range"]:focus::-ms-fill-upper {
+  background: #23242a;
+  box-shadow: 0 0 0 2px #39ff14, 0 0 16px #39ff1488;
+}
+input[type="range"]::-ms-thumb {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #181a22;
+  border: 3px solid #1e90ff;
+  box-shadow: 0 0 0 2px #23242a, 0 0 12px #1e90ff88;
+  transition: border 0.18s, box-shadow 0.18s, background 0.18s;
+  cursor: pointer;
+}
+input[type="range"]:hover::-ms-thumb,
+input[type="range"]:focus::-ms-thumb {
+  border: 3px solid #39ff14;
+  box-shadow: 0 0 0 2px #39ff14, 0 0 16px #39ff1488;
+  background: #23242a;
+}
+input[type="range"]:focus {
+  outline: none;
 }
 
 .sequencer-grid {
   display: flex;
   flex-direction: column-reverse;
   gap: 8px;
-  background: #222;
-  padding: 32px 24px 24px 24px;
+  background: linear-gradient(135deg, #23242a 60%, #181a22 100%);
+  padding: 24px 24px 18px 24px;
   border-radius: 18px;
-  box-shadow: 0 4px 32px #000a;
+  box-shadow: 0 0 0 2px #23242a, 0 2px 12px #000a, 0 0 0 1.5px #444 inset;
+  border: 2.5px solid #444b55;
 }
 
 .sequencer-row {
@@ -97,7 +210,7 @@ input[type="range"] {
   height: 64px;
   border-radius: 50%;
   border: none;
-  font-size: 2.5rem;
+  font-size: 1.1rem;
   color: #fff;
   background: #222;
   box-shadow: 0 4px 24px #000a, 0 0 0 4px #444 inset;
@@ -105,6 +218,8 @@ input[type="range"] {
   transition: background 0.15s, box-shadow 0.15s, transform 0.1s;
   outline: none;
   user-select: none;
+  font-family: 'Orbitron', Arial, sans-serif;
+  letter-spacing: 0.08em;
 }
 .arcade-btn:active {
   transform: scale(0.93);
@@ -113,4 +228,65 @@ input[type="range"] {
 .arcade-btn-blue {
   background: #1e90ff;
   color: #fff;
+}
+
+.arcade-btn-active {
+  background: #39ff14 !important;
+  color: #111 !important;
+  box-shadow: 0 0 0 2px #39ff14, 0 0 16px #39ff14cc, 0 2px 16px #000a;
+  border-color: #39ff14 !important;
+}
+
+.play-btn {
+  background: #181a22;
+  color: #1e90ff;
+  border: none;
+  border-radius: 32px;
+  padding: 0.7em 2.2em;
+  font-size: 1.3rem;
+  font-family: 'Orbitron', Arial, sans-serif;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  box-shadow: 0 0 0 2px #23242a, 0 0 16px #1e90ff44, 0 2px 16px #000a;
+  outline: none;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s, box-shadow 0.18s, transform 0.12s;
+  margin-bottom: 24px;
+  margin-top: 8px;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 1;
+}
+.play-btn:hover, .play-btn:focus {
+  background: #23242a;
+  color: #39ff14;
+  box-shadow: 0 0 0 2px #39ff14, 0 0 24px #39ff1488, 0 2px 24px #000a;
+  transform: translateY(-2px) scale(1.04);
+}
+.play-btn:active {
+  background: #101117;
+  color: #1e90ff;
+  box-shadow: 0 0 0 2px #1e90ff, 0 0 8px #1e90ff88, 0 1px 8px #000a;
+  transform: scale(0.97);
+}
+
+.indicator-light {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #39ff14;
+  box-shadow: 0 0 8px #39ff14cc, 0 0 2px #fff;
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 2px;
+}
+
+.digital-label {
+  font-family: 'Orbitron', Arial, sans-serif;
+  font-size: 0.95rem;
+  color: #39ff14;
+  letter-spacing: 0.12em;
+  text-shadow: 0 0 4px #39ff14cc;
+  margin-bottom: 6px;
+  display: block;
 }

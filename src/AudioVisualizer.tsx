@@ -53,7 +53,7 @@ function Stars({ count = 200, bigCount = 8 }) {
       {points.map((p, i) => (
         <mesh key={i} position={p.pos}>
           <sphereGeometry args={[p.size, 6, 6]} />
-          <meshStandardMaterial color={p.color} emissive={p.color} emissiveIntensity={2.5} />
+          <meshStandardMaterial color={p.color || '#39ff14'} emissive={p.color || '#39ff14'} emissiveIntensity={2.5} />
         </mesh>
       ))}
     </group>
@@ -87,7 +87,7 @@ function Nebulae({ count = 3 }) {
       {nebulae.map((n, i) => (
         <mesh key={i} position={n.pos} rotation={n.rot}>
           <planeGeometry args={[n.size, n.size]} />
-          <meshBasicMaterial color={n.color} transparent opacity={n.opacity} blending={THREE.AdditiveBlending} />
+          <meshBasicMaterial color={n.color || '#39ff14'} transparent opacity={n.opacity} blending={THREE.AdditiveBlending} />
         </mesh>
       ))}
     </group>

@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import './App.css';
 import AudioVisualizer from './AudioVisualizer';
+import MultiVisualizer from './MultiVisualizer';
 
 const ROWS = 6;
 const COLS = 16;
@@ -45,6 +46,7 @@ function App() {
   const [isMouseDown, setIsMouseDown] = useState(false);
   const analyserRef = useRef<AnalyserNode | null>(null);
   const [pitch, setPitch] = useState(0); // in semitones
+  const [arcadePressed, setArcadePressed] = useState([false, false, false, false]);
 
   // Load samples on mount
   React.useEffect(() => {
@@ -165,9 +167,39 @@ function App() {
     return () => window.removeEventListener('mouseup', handleMouseUp);
   }, []);
 
+  // Keyboard shortcuts for arcade buttons
+  React.useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.repeat) return;
+      if (e.key === 'a' || e.key === 'A') { playArcadeSound(0); setArcadePressed(p => [true, p[1], p[2], p[3]]); }
+      if (e.key === 's' || e.key === 'S') { playArcadeSound(1); setArcadePressed(p => [p[0], true, p[2], p[3]]); }
+      if (e.key === 'd' || e.key === 'D') { playArcadeSound(2); setArcadePressed(p => [p[0], p[1], true, p[3]]); }
+      if (e.key === 'f' || e.key === 'F') { playArcadeSound(3); setArcadePressed(p => [p[0], p[1], p[2], true]); }
+    };
+    const handleKeyUp = (e: KeyboardEvent) => {
+      if (e.key === 'a' || e.key === 'A') setArcadePressed(p => [false, p[1], p[2], p[3]]);
+      if (e.key === 's' || e.key === 'S') setArcadePressed(p => [p[0], false, p[2], p[3]]);
+      if (e.key === 'd' || e.key === 'D') setArcadePressed(p => [p[0], p[1], false, p[3]]);
+      if (e.key === 'f' || e.key === 'F') setArcadePressed(p => [p[0], p[1], p[2], false]);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('keyup', handleKeyUp);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keyup', handleKeyUp);
+    };
+  }, []);
+
+  // Helper for click: briefly show pressed state
+  const handleArcadeBtnClick = (i: number) => {
+    playArcadeSound(i);
+    setArcadePressed(p => p.map((v, idx) => idx === i ? true : v) as [boolean, boolean, boolean, boolean]);
+    setTimeout(() => setArcadePressed(p => p.map((v, idx) => idx === i ? false : v) as [boolean, boolean, boolean, boolean]), 120);
+  };
+
   return (
     <div className="sequencer-app">
-      <AudioVisualizer analyser={analyserRef.current} />
+      <MultiVisualizer analyser={analyserRef.current} />
       <div className="sliders">
         <div className="slider-group">
           <label>Tempo: {tempo} BPM</label>
@@ -207,8 +239,7 @@ function App() {
       >
         {isPlaying ? 'Stop' : 'Play'}
       </button>
-      <div
-        className="sequencer-grid"
+      <div className="sequencer-grid"
         onMouseLeave={() => setIsMouseDown(false)}
       >
         {grid.map((row, rowIdx) => (
@@ -225,15 +256,14 @@ function App() {
           </div>
         ))}
       </div>
-      {/* Arcade Buttons Row */}
       <div className="arcade-buttons-row">
         {[0, 1, 2, 3].map(i => (
           <button
             key={i}
-            className="arcade-btn arcade-btn-blue"
-            onClick={() => playArcadeSound(i)}
+            className={`arcade-btn arcade-btn-blue${arcadePressed[i] ? ' arcade-btn-active' : ''}`}
+            onClick={() => handleArcadeBtnClick(i)}
           >
-            {/* No text or dot inside the button */}
+            {['A', 'S', 'D', 'F'][i]}
           </button>
         ))}
       </div>
