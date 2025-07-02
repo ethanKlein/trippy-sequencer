@@ -36,6 +36,58 @@ This project is a web-based step sequencer and audio visualizer built with React
 - **React Three Fiber & Three.js**: For creating interactive 3D audio visualizations.
 - **CSS**: For styling the application.
 
+## Understanding Project Configuration Files
+
+This section provides a brief overview of key configuration files for those re-familiarizing themselves with React/TypeScript projects.
+
+### `tsconfig.json` - TypeScript Configuration
+
+The `tsconfig.json` file in the root directory specifies the compiler options required to compile the TypeScript project. Here are some of the key options used:
+
+-   **`compilerOptions`**: This object contains all the compiler settings.
+    -   **`target: "es5"`**: Specifies the ECMAScript target version for the compiled JavaScript output. "es5" ensures compatibility with older browsers. Modern projects might target "es6" or newer.
+    -   **`lib: ["dom", "dom.iterable", "esnext"]`**: Lists the library files to be included in the compilation.
+        -   `"dom"`: Includes DOM-related APIs (like `window`, `document`).
+        -   `"dom.iterable"`: Includes support for DOM iterables (e.g., for NodeList).
+        -   `"esnext"`: Includes the latest ECMAScript features.
+    -   **`allowJs: true`**: Allows JavaScript files to be compiled alongside TypeScript files.
+    -   **`skipLibCheck: true`**: Skips type checking of all declaration files (`*.d.ts`). This can speed up compilation but might miss some type errors in external libraries.
+    -   **`esModuleInterop: true`**: Enables compatibility with modules that use CommonJS `module.exports` by creating synthetic default imports. This makes it easier to import libraries that aren't written as ES modules.
+    -   **`allowSyntheticDefaultImports: true`**: Allows default imports from modules with no default export. `esModuleInterop` implies this.
+    -   **`strict: true`**: Enables all strict type-checking options (e.g., `noImplicitAny`, `strictNullChecks`). This is highly recommended for robust TypeScript code.
+    -   **`forceConsistentCasingInFileNames: true`**: Ensures that filenames are cased consistently, which is important for case-sensitive file systems.
+    -   **`noFallthroughCasesInSwitch: true`**: Reports errors for fallthrough cases in switch statements where a `break` or `return` is missing.
+    -   **`module: "esnext"`**: Specifies the module system for the generated code. "esnext" uses modern ES module syntax, which tools like Webpack can then process.
+    -   **`moduleResolution: "node"`**: Specifies how TypeScript resolves module imports, mimicking Node.js module resolution strategy.
+    -   **`resolveJsonModule: true`**: Allows importing `.json` files as modules.
+    -   **`isolatedModules: true`**: Ensures that each file can be compiled as a separate module. Required by some bundlers like Babel.
+    -   **`noEmit: true`**: Instructs the TypeScript compiler not to output any files (JavaScript code, sourcemaps, etc.). This is common in projects where another tool (like Babel or `react-scripts`'s Webpack setup) handles the actual transpilation from TypeScript to JavaScript. TypeScript is used primarily for type checking.
+    -   **`jsx: "react-jsx"`**: Configures JSX support. `"react-jsx"` uses the new JSX transform (React 17+) which doesn't require `import React from 'react'` in every file for JSX.
+-   **`include: ["src"]`**: Specifies an array of file paths or patterns that the TypeScript compiler should include in the compilation. Here, it includes all files in the `src` directory.
+
+### `package.json` - Project Manifest
+
+The `package.json` file is the heart of any Node.js project, including React applications. It contains metadata about the project (like name, version) and lists its dependencies and scripts.
+
+-   **`name`**: The name of your project.
+-   **`version`**: The current version of your project.
+-   **`private: true`**: Indicates that the project is private and should not be published to npm.
+-   **`dependencies`**: This object lists all the packages required for your application to run in production.
+    -   **`react`**: The core React library for building user interfaces.
+    -   **`react-dom`**: Provides DOM-specific methods, enabling React to interact with the browser's DOM.
+    -   **`typescript`**: The TypeScript language compiler. While it's used during development, the types it provides are compiled away for production, but the package itself is often listed here.
+    -   **`@types/react`**, **`@types/react-dom`**, **`@types/jest`**, **`@types/node`**: These are type declaration packages. They provide TypeScript with type information for JavaScript libraries that don't include their own types. For example, `@types/react` provides types for the React library.
+    -   **`react-scripts`**: Part of Create React App, this package contains scripts and configurations for building, running, and testing the application (e.g., Webpack, Babel, ESLint settings).
+    -   Other libraries like `@react-three/drei`, `@react-three/fiber`, `three` are for specific features (3D graphics in this case).
+-   **`devDependencies`** (if present): Would list packages only needed during development and testing (e.g., linters, testing frameworks if not included by `react-scripts`). This project lists most dev tools under `dependencies` as is common with `create-react-app`.
+-   **`scripts`**: Defines a set of command-line scripts that can be run using `npm run <script-name>` or `yarn <script-name>`.
+    -   **`start`**: Typically starts the development server.
+    -   **`build`**: Typically builds the application for production.
+    -   **`test`**: Typically runs the test suite.
+    -   **`eject`**: A Create React App specific script to "eject" from the managed configuration, giving full control over build tools.
+-   **`eslintConfig`**: Configures ESLint, a tool for identifying and reporting on patterns found in ECMAScript/JavaScript code. Create React App pre-configures this.
+-   **`browserslist`**: Specifies the range of browsers the application supports. This information is used by tools like Babel and Autoprefixer to generate compatible JavaScript and CSS.
+
 ## Available Scripts
 
 In the project directory, you can run:
