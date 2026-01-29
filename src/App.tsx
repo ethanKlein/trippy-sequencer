@@ -1,6 +1,7 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './App.css';
 import MultiVisualizer from './MultiVisualizer';
+import cockpitBackground from './cockpit-back.png';
 
 const ROWS = 6;
 const COLS = 16;
@@ -38,6 +39,11 @@ function App() {
   const analyserRef = useRef<AnalyserNode | null>(null);
   const [pitch, setPitch] = useState(0); // in semitones
   const [arcadePressed, setArcadePressed] = useState([false, false, false, false]);
+
+  // Set background image
+  useEffect(() => {
+    document.documentElement.style.setProperty('--cockpit-bg-image', `url(${cockpitBackground})`);
+  }, []);
 
   // Load samples on mount
   React.useEffect(() => {
